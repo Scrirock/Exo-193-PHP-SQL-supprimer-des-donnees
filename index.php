@@ -15,8 +15,12 @@ require "./Classes/DB.php";
 
 $conn = DB::getInstance();
 
-$sql = "DELETE FROM exo_193.user WHERE id = 4";
-$conn->exec($sql);
+$test = "SELECT max(id) FROM exo_193.user";
+foreach  ($conn->query($test) as $last) {
+    $sql = "DELETE FROM exo_193.user WHERE id = '$last[0]'";
+    $conn->exec($sql);
+}
+
 
 $sql = "TRUNCATE TABLE exo_193.user";
 $conn->exec($sql);
