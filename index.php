@@ -10,3 +10,26 @@
  *    --> Finalement, vous décidez de supprimer complètement la table
  *    --> Et pour finir, comme vous n'avez plus de table dans la base de données, vous décidez de supprimer aussi la base de données.
  */
+
+require "./Classes/DB.php";
+
+$conn = DB::getInstance();
+
+$sql = "DELETE FROM exo_193.user WHERE id = 4";
+$conn->exec($sql);
+
+$sql = "TRUNCATE TABLE exo_193.user";
+$conn->exec($sql);
+
+$newUser = "
+        INSERT INTO exo_193.user (nom, prenom, rue, numero, code_postal, ville, pays, mail) 
+        VALUES ('Roger', 'Roger', 'RogerStreet', 4, 7898, 'Bidule', 'RogerLand', 'rogerRoro@Roger.be')
+    ";
+$conn->exec($newUser);
+
+$sql = "DROP TABLE exo_193.user";
+$conn->exec($sql);
+
+$sql = "DROP DATABASE exo_193";
+$conn->exec($sql);
+
